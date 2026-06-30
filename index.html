@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nguyễn Đăng Khoa — TikTok Shop Operations Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0D0D0D;
+    --white: #FAFAF8;
+    --gray-1: #F2F2F0;
+    --gray-2: #E4E4E0;
+    --gray-3: #9B9B95;
+    --gray-4: #2A2A28;
+    --accent: #FF4B2B;
+    --accent-soft: #FFF0ED;
+    --teal: #00897B;
+    --teal-soft: #E6F4F1;
+    --amber: #D4790A;
+    --amber-soft: #FEF3E2;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-2);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-name {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px; color: var(--gray-4);
+    text-decoration: none; font-weight: 500;
+    transition: color .15s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* SECTIONS */
+  section { padding: 56px 2rem; max-width: 900px; margin: 0 auto; }
+  section:first-of-type { padding-top: 120px; }
+
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--gray-4);
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  .hero-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--black);
+    line-height: 1.5;
+  }
+  .hero-highlight-item::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 2.5rem;
+  }
+  .mini-map {
+    border: 1px solid var(--gray-2);
+    border-radius: 16px;
+    padding: 24px;
+    background: var(--white);
+    max-width: 580px;
+  }
+  .mini-map-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gray-3); margin-bottom: 14px;
+  }
+  .mini-map-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--gray-1);
+  }
+  .mini-map-row:last-child { border-bottom: none; }
+  .mini-map-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-live { background: #AFA9EC; }
+  .dot-video { background: #5DCAA5; }
+  .dot-card { background: #EF9F27; }
+  .mini-map-src { font-size: 13px; font-weight: 600; min-width: 110px; }
+  .mini-map-flow { font-size: 11px; color: var(--gray-3); display: flex; align-items: center; gap: 6px; flex: 1; }
+  .mini-map-step { background: var(--gray-1); padding: 3px 9px; border-radius: 5px; white-space: nowrap; }
+  .mini-map-arrow { color: var(--gray-2); }
+  .mini-map-cta { font-size: 12px; color: var(--accent); font-weight: 500; margin-top: 14px; display: flex; align-items: center; gap: 4px; }
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--black);
+    border-radius: 12px;
+    padding: 16px 14px;
+    background: var(--black);
+  }
+  .stat-item .num {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--white);
+  }
+  .stat-item .label {
+    font-size: 11.5px; color: rgba(255,255,255,.6);
+    margin-top: 8px;
+    line-height: 1.45;
+  }
+  .stat-item.primary .num {
+    font-size: 38px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-item.primary .label {
+    font-size: 12px;
+    color: rgba(255,255,255,.65);
+    margin-top: 8px;
+  }
+
+  /* DIVIDER */
+  .section-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after {
+    content: ''; flex: 1;
+    height: 1px; background: var(--gray-2);
+  }
+
+  /* OPERATIONS MAP */
+  .ops-table {
+    border: 1px solid var(--gray-2);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .ops-thead {
+    display: grid;
+    grid-template-columns: 120px repeat(4, 1fr);
+    background: var(--black);
+  }
+  .ops-th {
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 12px 14px;
+  }
+  .ops-row {
+    display: grid;
+    grid-template-columns: 120px repeat(4, 1fr);
+    border-top: 1px solid var(--gray-2);
+  }
+  .ops-src-cell {
+    padding: 14px;
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 600;
+    display: flex; align-items: flex-start;
+  }
+  .ops-src-cell.live { background: #F0EDFF; color: #3C3489; }
+  .ops-src-cell.video { background: var(--teal-soft); color: #085041; }
+  .ops-src-cell.card { background: var(--amber-soft); color: #633806; }
+  .ops-detail-cell {
+    padding: 14px;
+    border-left: 1px solid var(--gray-1);
+  }
+  .ops-detail-title {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .ops-detail-list { list-style: none; padding: 0; margin: 0; }
+  .ops-detail-list li {
+    font-size: 11.5px; color: var(--gray-4);
+    line-height: 1.55;
+    padding: 2px 0;
+  }
+  .ops-detail-list li::before { content: '· '; color: var(--gray-3); }
+  .ops-detail-list li.hi { color: var(--accent); font-weight: 500; }
+  .ops-detail-list li.hi::before { color: var(--accent); }
+  .ops-tag-mini {
+    display: inline-block; font-size: 9.5px; font-weight: 500;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 2px 7px; border-radius: 4px; margin: 4px 3px 0 0;
+  }
+
+  /* SOP CARDS */
+  .sop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .sop-card {
+    border: 1px solid var(--gray-2);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .sop-card:hover {
+    border-color: var(--black);
+    box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  }
+  .sop-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .tag-live { background: #F0EDFF; color: #3C3489; }
+  .tag-video { background: var(--teal-soft); color: #085041; }
+  .tag-card { background: var(--amber-soft); color: #633806; }
+  .sop-card h3 {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 600;
+    margin-bottom: 6px; letter-spacing: -0.01em;
+  }
+  .sop-card p {
+    font-size: 12px; color: var(--gray-3);
+    line-height: 1.5; margin-bottom: 14px;
+  }
+  .sop-phases {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .phase-pill {
+    font-size: 10px; font-weight: 500;
+    padding: 3px 8px; border-radius: 20px;
+    background: var(--gray-1); color: var(--gray-4);
+  }
+
+  /* SOP DETAIL */
+  .sop-detail {
+    display: none;
+    border: 1px solid var(--gray-2);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .sop-detail.open { display: block; }
+  .sop-detail-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sop-detail-header h3 {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 600;
+  }
+  .close-btn {
+    font-size: 20px; cursor: pointer;
+    opacity: .6; background: none; border: none; color: white;
+    line-height: 1;
+  }
+  .sop-detail-body { padding: 20px; }
+  .funnel-grid { display: grid; gap: 8px; margin-bottom: 16px; }
+  .funnel-item { display: flex; gap: 12px; background: var(--gray-1); border-radius: 10px; padding: 10px 14px; align-items: flex-start; }
+  .funnel-n { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--accent); min-width: 24px; }
+  .funnel-body strong { font-size: 12.5px; font-weight: 600; display: block; margin-bottom: 2px; }
+  .funnel-body span { font-size: 11.5px; color: var(--gray-4); line-height: 1.5; }
+  .tax-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  .tax-card { background: var(--gray-1); border-radius: 10px; padding: 10px; text-align: center; }
+  .tax-card h4 { font-size: 11.5px; font-weight: 600; margin: 0 0 4px; }
+  .tax-card p { font-size: 10px; color: var(--gray-4); margin: 0; line-height: 1.4; }
+  .mix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+  .mix-card { background: var(--gray-1); border-radius: 10px; padding: 12px; }
+  .mix-card h4 { font-size: 11.5px; font-weight: 600; margin: 0 0 6px; }
+  .mix-card p { font-size: 11px; color: var(--gray-4); line-height: 1.5; margin: 0; }
+  .flow-box { background: var(--accent-soft); border-radius: 8px; padding: 10px 12px; margin: 8px 0 16px; }
+  .flow-box h5 { font-size: 10px; font-weight: 600; color: var(--accent); margin: 0 0 6px; text-transform: uppercase; letter-spacing: .05em; }
+  .flow-list { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+  .flow-step { font-size: 10.5px; background: white; padding: 3px 9px; border-radius: 5px; color: var(--black); }
+  .flow-arrow { color: var(--gray-3); font-size: 11px; }
+  .debug-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .debug-table td { padding: 7px 10px; border-bottom: 1px solid var(--gray-1); font-size: 11.5px; }
+  .debug-table td:first-child { font-weight: 600; color: var(--accent); width: 38%; }
+  .feedback-row { display: flex; border: 1px solid var(--gray-2); border-radius: 8px; overflow: hidden; margin: 8px 0 16px; }
+  .fb-col { flex: 1; padding: 10px 12px; }
+  .fb-col:first-child { border-right: 1px solid var(--gray-2); }
+  .fb-col h5 { font-size: 11px; font-weight: 600; margin: 0 0 4px; color: var(--accent); }
+  .fb-col p { font-size: 11px; color: var(--gray-4); margin: 0; line-height: 1.5; }
+  .tool-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tool-pill { background: var(--accent-soft); color: var(--accent); font-size: 10.5px; font-weight: 500; padding: 4px 11px; border-radius: 20px; }
+
+  /* MY ROLE SECTION */
+  .role-hero { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .role-card { flex: 1; min-width: 180px; background: var(--gray-1); border-radius: 12px; padding: 16px; }
+  .role-card .rlbl { font-size: 10px; color: var(--gray-3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+  .role-card .rval { font-size: 14px; font-weight: 600; line-height: 1.4; }
+  .role-diagram { background: var(--gray-1); border-radius: 16px; padding: 28px 24px; margin-bottom: 1.5rem; text-align: center; }
+  .owner-box { display: inline-block; background: var(--accent); color: white; font-weight: 600; padding: 12px 28px; border-radius: 10px; font-size: 14px; margin-bottom: 16px; }
+  .owner-sub { font-size: 11px; opacity: .85; margin-top: 3px; font-weight: 400; }
+  .role-connector { color: var(--gray-3); font-size: 18px; margin-bottom: 8px; }
+  .role-key-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .role-key-box { background: white; border: 1px solid var(--gray-2); border-radius: 8px; padding: 10px 14px; font-size: 11px; min-width: 110px; }
+  .role-key-box .rsrc { font-weight: 600; margin-bottom: 2px; }
+  .role-key-box .rwho { color: var(--gray-3); font-size: 10px; }
+  .step-flow { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+  .step-row { display: flex; gap: 14px; background: white; border: 1px solid var(--gray-2); border-radius: 10px; padding: 12px 16px; align-items: flex-start; }
+  .step-num { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--accent); min-width: 26px; }
+  .step-row strong { font-size: 13px; display: block; margin-bottom: 2px; }
+  .step-row span { font-size: 12px; color: var(--gray-4); line-height: 1.5; }
+  .scenario-box { background: var(--gray-1); border-left: 3px solid var(--accent); border-radius: 8px; padding: 16px 18px; }
+  .scenario-box h4 { font-size: 11px; font-weight: 600; color: var(--accent); margin: 0 0 10px; text-transform: uppercase; letter-spacing: .05em; }
+  .scenario-line { font-size: 13px; line-height: 1.7; color: var(--black); margin-bottom: 6px; }
+  .scenario-line b { color: var(--accent); }
+  .owner-box-standalone {
+    background: var(--black);
+    color: white;
+    border-radius: 12px;
+    padding: 16px 22px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .owner-box-standalone strong {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .owner-box-standalone span {
+    font-size: 12px;
+    color: rgba(255,255,255,.65);
+  }
+  .workflow-row {
+    display: flex; gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-1);
+    align-items: flex-start;
+  }
+  .workflow-row:last-child { border-bottom: none; }
+  .wf-phase {
+    font-size: 10px; font-weight: 600;
+    min-width: 76px; padding: 3px 8px;
+    border-radius: 4px; text-align: center;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  .wf-planning { background: #EBF3FF; color: #1552A0; }
+  .wf-exec { background: #FEF3E2; color: #633806; }
+  .wf-opt { background: #E6F4F1; color: #085041; }
+  .wf-report { background: #F0EDFF; color: #3C3489; }
+  .wf-text { font-size: 13px; line-height: 1.55; color: var(--black); flex: 1; }
+  .wf-who {
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 4px;
+    color: var(--gray-4); background: var(--gray-1);
+    white-space: nowrap; margin-top: 2px;
+    min-width: 50px; text-align: center;
+  }
+  .wf-who.khoa { background: var(--accent-soft); color: var(--accent); min-width: 60px; }
+  .role-note { background: var(--accent-soft); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: var(--accent); line-height: 1.5; }
+  .role-legend { display: flex; gap: 16px; margin-bottom: 12px; font-size: 11px; color: var(--gray-4); }
+  .role-legend span { display: flex; align-items: center; gap: 6px; }
+  .role-dot { width: 8px; height: 8px; border-radius: 2px; }
+  .dot-khoa { background: var(--accent); }
+  .dot-key { background: var(--gray-3); }
+
+  /* CASE STUDY */
+  .case-hero {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .case-hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .08;
+  }
+  .case-eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  .case-title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700; letter-spacing: -0.025em;
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .case-stat-row {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .case-stat .num {
+    font-family: var(--font-display);
+    font-size: 32px; font-weight: 700;
+    letter-spacing: -0.03em; color: var(--accent);
+  }
+  .case-stat .lbl {
+    font-size: 12px; color: rgba(255,255,255,.5); margin-top: 2px;
+  }
+  .case-sections {
+    display: grid; gap: 1rem;
+  }
+  .case-block {
+    border: 1px solid var(--gray-2);
+    border-radius: 12px; padding: 20px 22px;
+  }
+  .case-block h4 {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .case-block p, .case-block li {
+    font-size: 14px; color: var(--gray-4);
+    line-height: 1.65;
+  }
+  .case-block ul { padding-left: 18px; }
+  .case-block li { margin-bottom: 6px; }
+  .action-step {
+    display: flex; gap: 14px; padding: 10px 0;
+    border-bottom: 1px solid var(--gray-1);
+    align-items: flex-start;
+  }
+  .action-step:last-child { border-bottom: none; }
+  .step-n {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 700;
+    color: var(--gray-2); min-width: 28px;
+    letter-spacing: -0.02em; line-height: 1.4;
+  }
+  .step-content strong {
+    font-size: 13px; font-weight: 600; color: var(--black); display: block;
+    margin-bottom: 3px;
+  }
+  .step-content span { font-size: 13px; color: var(--gray-4); line-height: 1.55; }
+  .result-row-cs {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 0; border-bottom: 1px solid var(--gray-1);
+  }
+  .result-row-cs:last-child { border-bottom: none; }
+  .result-row-cs .rl { font-size: 13px; color: var(--gray-4); }
+  .result-row-cs .rv { font-size: 14px; font-weight: 600; color: var(--teal); }
+  .learning-item {
+    display: flex; gap: 12px; padding: 12px 0;
+    border-bottom: 1px solid var(--gray-1);
+  }
+  .learning-item:last-child { border-bottom: none; }
+  .l-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+  .l-text strong { font-size: 13px; font-weight: 600; color: var(--black); }
+  .l-text p { font-size: 13px; color: var(--gray-4); margin-top: 2px; line-height: 1.55; }
+
+  /* FOOTER */
+  .footer-section {
+    padding: 60px 2rem 40px;
+    max-width: 900px; margin: 0 auto;
+    border-top: 1px solid var(--gray-2);
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 2rem;
+  }
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 6px;
+  }
+  .footer-sub { font-size: 13px; color: var(--gray-3); }
+  .footer-links { display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a {
+    font-size: 13px; color: var(--gray-4);
+    text-decoration: none; font-weight: 500;
+  }
+  .footer-links a:hover { color: var(--black); }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    section { padding: 60px 1rem; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .mini-map { padding: 16px; }
+    .mini-map-row { flex-wrap: wrap; }
+    .mini-map-flow { flex-wrap: wrap; }
+    .ops-thead { display: none; }
+    .ops-row { grid-template-columns: 1fr; }
+    .ops-src-cell { font-size: 15px; padding: 12px 14px; }
+    .ops-detail-cell { border-left: none; border-top: 1px solid var(--gray-1); }
+    .ops-detail-title::before { content: attr(data-label) ': '; }
+    .ops-grid { grid-template-columns: 110px repeat(4, 1fr); font-size: 11px; }
+    .case-hero { padding: 24px; }
+    .footer-section { padding: 40px 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Nguyen Dang Khoa</div>
+  <ul class="nav-links">
+    <li><a href="#myrole">My Role</a></li>
+    <li><a href="#operations">Process</a></li>
+    <li><a href="#sop">SOP</a></li>
+    <li><a href="#casestudy">P&G Beauty</a></li>
+    <li><a href="#casestudy2">Stanhome</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <span style="display:inline-block;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent);border-radius:6px;padding:6px 14px;">Case Study Portfolio</span>
+    <span>Ecommerce Operations · Strategy &amp; Growth</span>
+  </div>
+  <h1 class="hero-title">
+    Sales is a result,<br>
+    not <em>luck.</em>
+  </h1>
+  <p class="hero-sub">
+    4+ years in ecommerce, focused on FMCG and Beauty — from TikTok Shop to Shopee.
+  </p>
+  <div class="hero-highlights">
+    <div class="hero-highlight-item">GMV Tracking & Forecasting</div>
+    <div class="hero-highlight-item">KOL/KOC Management & Deal Negotiation</div>
+    <div class="hero-highlight-item">Performance Diagnosis & Resource Allocation</div>
+    <div class="hero-highlight-item">Data Analytics & AI-driven Automation</div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item primary">
+      <div class="num">9,300%</div>
+      <div class="label">GMV growth · P&G Beauty</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">5</div>
+      <div class="label">Sales channels managed at once<br>(Live, Video, Product Card...)</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">4+</div>
+      <div class="label">Years of hands-on experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="num" style="color:var(--accent)">✦ AI</div>
+      <div class="label" style="color:rgba(255,255,255,.65)">Used for daily reports<br>and data analysis</div>
+    </div>
+  </div>
+
+  <div class="mini-map">
+    <div class="mini-map-label">Operations process — preview</div>
+    <div class="mini-map-row">
+      <div class="mini-map-dot dot-live"></div>
+      <div class="mini-map-src">Live affiliate</div>
+      <div class="mini-map-flow">
+        <span class="mini-map-step">Book KOL</span>
+        <span class="mini-map-arrow">→</span>
+        <span class="mini-map-step">Track NMV</span>
+        <span class="mini-map-arrow">→</span>
+        <span class="mini-map-step">ROI rank</span>
+      </div>
+    </div>
+    <div class="mini-map-row">
+      <div class="mini-map-dot dot-video"></div>
+      <div class="mini-map-src">Video affiliate</div>
+      <div class="mini-map-flow">
+        <span class="mini-map-step">Kalodata research</span>
+        <span class="mini-map-arrow">→</span>
+        <span class="mini-map-step">Seeding</span>
+        <span class="mini-map-arrow">→</span>
+        <span class="mini-map-step">Boost winner</span>
+      </div>
+    </div>
+    <div class="mini-map-row">
+      <div class="mini-map-dot dot-card"></div>
+      <div class="mini-map-src">Product card</div>
+      <div class="mini-map-flow">
+        <span class="mini-map-step">SKU ranking</span>
+        <span class="mini-map-arrow">→</span>
+        <span class="mini-map-step">Listing</span>
+        <span class="mini-map-arrow">→</span>
+        <span class="mini-map-step">PSA</span>
+      </div>
+    </div>
+    <div class="mini-map-cta">See all 5 sources ↓</div>
+  </div>
+</section>
+
+<!-- MY ROLE -->
+<section id="myrole">
+  <div class="section-label">My role — revenue ownership</div>
+
+  <p style="font-size:16px;color:var(--gray-4);line-height:1.65;max-width:600px;margin-bottom:1.5rem">
+    I do not do every task in these 5 channels myself. Each channel has its own key person. My job is to own the final number, find which channel is weak, and push the right person at the right time.
+  </p>
+
+  <div class="role-hero">
+    <div class="role-card"><div class="rlbl">Role</div><div class="rval">Store Owner — P&G Beauty on TikTok Shop, through Mesa (P&G's official distributor in Vietnam)</div></div>
+    <div class="role-card"><div class="rlbl">Owns</div><div class="rval">Total GMV target + Deal list</div></div>
+    <div class="role-card"><div class="rlbl">Does not do directly</div><div class="rval">Content, hosting, editing, ads setup</div></div>
+  </div>
+
+  <div class="owner-box-standalone">
+    <strong>Nguyen Dang Khoa — Store Owner</strong>
+    <span>Set target → Track numbers → Diagnose → Push the right key person</span>
+  </div>
+
+  <div class="section-label" style="margin-top:2rem">Decision process when target is missed</div>
+  <div class="step-flow">
+    <div class="step-row"><div class="step-num">01</div><div><strong>Set target</strong><span>Break down the total GMV target into each source, based on expected contribution for the month</span></div></div>
+    <div class="step-row"><div class="step-num">02</div><div><strong>Track in real time</strong><span>Check GMV for each source every day — compare to the target so far</span></div></div>
+    <div class="step-row"><div class="step-num">03</div><div><strong>Diagnose</strong><span>If the total is below target, find which source is falling behind the plan the most</span></div></div>
+    <div class="step-row"><div class="step-num">04</div><div><strong>Push the right key person</strong><span>Contact the key person for that source and ask for a clear action (more bookings, new deal, boost ads...)</span></div></div>
+    <div class="step-row"><div class="step-num">05</div><div><strong>Follow up & repeat</strong><span>Check again after a few days — if still short, look at another source with more room to grow</span></div></div>
+  </div>
+
+  <div class="section-label">Real example</div>
+  <div class="scenario-box">
+    <h4>Mid-month target gap</h4>
+    <div class="scenario-line">By day 20, total GMV only reached <b>60% of the month's target</b> — a big gap with just 10 days left.</div>
+    <div class="scenario-line">Breakdown by source: <b>Live affiliate was the weakest</b> — fewer KOLs booked that week.</div>
+    <div class="scenario-line">Action: negotiated more Mega Live slots with a Top Creator myself, and <b>pushed the Product Card key person</b> to raise PSA budget on the SKU with the best ROAS to cover the gap.</div>
+    <div class="scenario-line">Checked again after 3 days — if still short, looked at Video affiliate for more room to grow.</div>
+  </div>
+</section>
+
+<!-- OPERATIONS MAP -->
+<section id="operations">
+  <div class="section-label">TikTok Shop Operations Process</div>
+  <p style="font-size:15px;color:var(--gray-4);line-height:1.65;max-width:640px;margin-bottom:1.5rem">
+    This is a framework I built myself, after tracking and coordinating 5 sales channels on TikTok Shop. It is not an internal document from any company — it's how I organized my own knowledge to apply in future roles.
+  </p>
+  <div class="ops-table">
+    <div class="ops-thead">
+      <div class="ops-th"></div>
+      <div class="ops-th">Planning</div>
+      <div class="ops-th">Execution</div>
+      <div class="ops-th">Optimization</div>
+      <div class="ops-th">Reporting</div>
+    </div>
+
+    <div class="ops-row">
+      <div class="ops-src-cell live">Live inhouse</div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Script funnel & channel strategy</div>
+        <ul class="ops-detail-list">
+          <li class="hi">7-step funnel: Hook FOMO → Dramatize problem → USP → Prove result → Create demand → Minigame → CTA</li>
+          <li>Host style fits the brand</li>
+          <li>Concept by phase: build trust → convert → scale</li>
+          <li>Deal structure for peak hours</li>
+          <li>GMV/session target + stock forecast</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Run by the funnel</div>
+        <ul class="ops-detail-list">
+          <li>Pre-show checklist: equipment, stock, deal</li>
+          <li>Host follows all 7 funnel steps</li>
+          <li>Check dashboard every 30 minutes</li>
+          <li>Trigger flash deal when viewers drop &gt;20%</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Funnel-stage debug</div>
+        <ul class="ops-detail-list">
+          <li>Drop at Hook → change FOMO angle</li>
+          <li>Drop at USP → make the difference clearer</li>
+          <li>Low CVR at CTA → add more urgency, minigames</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Metrics</div>
+        <ul class="ops-detail-list">
+          <li>GMV/session, CVR by funnel stage</li>
+          <li>Peak viewers, AOV</li>
+        </ul>
+        <span class="ops-tag-mini">Session recap</span>
+      </div>
+    </div>
+
+    <div class="ops-row">
+      <div class="ops-src-cell live">Live affiliate</div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">KOL strategy & channel mix</div>
+        <ul class="ops-detail-list">
+          <li>Tiers: Mega Live (Top Creator) vs Daily Live (KOC)</li>
+          <li>Brief: USP, price floor, key message</li>
+          <li>Book creators by schedule + slot</li>
+          <li>Commission tiered by NMV</li>
+          <li class="hi">Connect with MCNs to add more live sessions — more creators than solo booking</li>
+          <li class="hi">MCNs help negotiate better deals/commission across the network</li>
+          <li class="hi">At the same time, book exclusive live shows with Top Creators → keep a stable base of GMV</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Run the show + ads handoff</div>
+        <ul class="ops-detail-list">
+          <li>Creator posts a teaser video before the live show</li>
+          <li>Creator sends video code + ads code → I pass it to the ads team → they boost the live show</li>
+          <li>Watch the live show: check deal, price, brief are correct</li>
+          <li>Track NMV in real time</li>
+          <li>Help with hooks/deals if performance is low</li>
+          <li>Make sure stock matches the forecast</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">ROI-based decision</div>
+        <ul class="ops-detail-list">
+          <li>Rank after each show: Top/Maintain/Cut</li>
+          <li>Compare organic GMV vs GMV with ads boost</li>
+          <li>Upgrade winning KOLs → exclusive commission</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Metrics</div>
+        <ul class="ops-detail-list">
+          <li>NMV/KOL, ROI = NMV/(fee+commission+ads)</li>
+          <li>Uplift from ads boost</li>
+          <li class="hi">GMV mix: solo booking vs MCN vs exclusive</li>
+        </ul>
+        <span class="ops-tag-mini">KOL ROI rank</span>
+      </div>
+    </div>
+
+    <div class="ops-row">
+      <div class="ops-src-cell video">Video inhouse</div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Content taxonomy & character</div>
+        <ul class="ops-detail-list">
+          <li class="hi">Content types: Introduction, Entertainment, Review, Engagement</li>
+          <li>5 fixed content series</li>
+          <li>Detailed script: scene, setting, music</li>
+          <li>Brand approval loop before production</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Production with structured feedback</div>
+        <ul class="ops-detail-list">
+          <li>Film based on the detailed script</li>
+          <li class="hi">2-layer brand feedback: angle before filming, draft after editing</li>
+          <li>Review and approve before posting</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Iterative improvement loop</div>
+        <ul class="ops-detail-list">
+          <li>Track performance 4 days after posting</li>
+          <li>A/B test hooks every week</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Metrics</div>
+        <ul class="ops-detail-list">
+          <li>Raw views vs target, organic views</li>
+          <li>KPI engagement target vs actual</li>
+        </ul>
+        <span class="ops-tag-mini">4-day review</span>
+      </div>
+    </div>
+
+    <div class="ops-row">
+      <div class="ops-src-cell video">Video affiliate</div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Seeding strategy</div>
+        <ul class="ops-detail-list">
+          <li class="hi">Research KOCs with a data tool: real GMV, conversion rate</li>
+          <li>Seeding list by tier: Celeb/Top KOL/KOC</li>
+          <li>Connect through many channels: outreach, network, platform support</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Seeding & winner identification</div>
+        <ul class="ops-detail-list">
+          <li>Send sample + brief, confirm it was received</li>
+          <li>Remind after 7 days, flag after 14 days</li>
+          <li>Quality check: brief, product, compliance</li>
+          <li>Internal team makes videos at the same time as seeding</li>
+          <li class="hi">Track GMV for every video → find the ones with strong sales</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Boost winners with ads</div>
+        <ul class="ops-detail-list">
+          <li>Rank after 30 days: Star/Maintain/Cut</li>
+          <li class="hi">Winning video → ask for or buy the ads code → send to ads team to boost more</li>
+          <li class="hi">Push shoppable videos into GMV Max → automatic delivery to the widest audience</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Metrics</div>
+        <ul class="ops-detail-list">
+          <li>NMV/KOC, posting rate, cost/NMV</li>
+          <li class="hi">GMV uplift after ads boost</li>
+        </ul>
+        <span class="ops-tag-mini">Monthly review</span>
+      </div>
+    </div>
+
+    <div class="ops-row">
+      <div class="ops-src-cell card">Product card</div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">SKU & listing strategy</div>
+        <ul class="ops-detail-list">
+          <li>SKU groups: A (hero)/B (volume)/C (long-tail)</li>
+          <li>Keyword research, listing audit</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Listing setup + PSA handoff</div>
+        <ul class="ops-detail-list">
+          <li>Set up clean listing for top-priority SKUs</li>
+          <li class="hi">Compile the month's Top Selling SKU list → send it to ads team to run PSA and push search ranking</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Funnel debug</div>
+        <ul class="ops-detail-list">
+          <li>Debug impression/CTR/CVR by funnel stage</li>
+          <li>Compare ranking before/after PSA</li>
+        </ul>
+      </div>
+      <div class="ops-detail-cell">
+        <div class="ops-detail-title">Metrics</div>
+        <ul class="ops-detail-list">
+          <li>Impression, CTR, CVR, ROAS</li>
+          <li class="hi">Search ranking uplift after PSA</li>
+        </ul>
+        <span class="ops-tag-mini">Weekly review</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOP -->
+<section id="sop">
+  <div class="section-label">Standard operating procedures</div>
+  <div class="sop-grid">
+
+    <div class="sop-card" onclick="toggleSOP('sop-live-inhouse')">
+      <span class="sop-tag tag-live">Live</span>
+      <h3>Live inhouse</h3>
+      <p>Run an 18-hour live show using a 7-step sales psychology funnel.</p>
+      <div class="sop-phases">
+        <span class="phase-pill">7-step funnel</span>
+        <span class="phase-pill">Realtime monitor</span>
+        <span class="phase-pill">Funnel debug</span>
+      </div>
+    </div>
+
+    <div class="sop-card" onclick="toggleSOP('sop-live-affiliate')">
+      <span class="sop-tag tag-live">Live</span>
+      <h3>Live affiliate</h3>
+      <p>A 3-source channel mix (solo booking + MCN + exclusive) with ads boost handoff.</p>
+      <div class="sop-phases">
+        <span class="phase-pill">Channel mix</span>
+        <span class="phase-pill">Ads handoff</span>
+        <span class="phase-pill">ROI rank</span>
+      </div>
+    </div>
+
+    <div class="sop-card" onclick="toggleSOP('sop-video-inhouse')">
+      <span class="sop-tag tag-video">Video</span>
+      <h3>Video inhouse</h3>
+      <p>4-type content taxonomy + 2-layer brand approval (angle, demo).</p>
+      <div class="sop-phases">
+        <span class="phase-pill">Content taxonomy</span>
+        <span class="phase-pill">2-layer feedback</span>
+        <span class="phase-pill">4-day review</span>
+      </div>
+    </div>
+
+    <div class="sop-card" onclick="toggleSOP('sop-video-affiliate')">
+      <span class="sop-tag tag-video">Video</span>
+      <h3>Video affiliate</h3>
+      <p>Kalodata research + double down on winners with ads code + GMV Max.</p>
+      <div class="sop-phases">
+        <span class="phase-pill">Data-driven seeding</span>
+        <span class="phase-pill">Winner detection</span>
+        <span class="phase-pill">Double-down boost</span>
+      </div>
+    </div>
+
+    <div class="sop-card" onclick="toggleSOP('sop-product-card')">
+      <span class="sop-tag tag-card">Search</span>
+      <h3>Product card</h3>
+      <p>24/7 listing + Top SKU handoff so the ads team can run PSA for top search.</p>
+      <div class="sop-phases">
+        <span class="phase-pill">SKU ranking</span>
+        <span class="phase-pill">PSA handoff</span>
+        <span class="phase-pill">Funnel debug</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SOP Details -->
+  <div class="sop-detail" id="sop-live-inhouse">
+    <div class="sop-detail-header">
+      <h3>SOP — Live inhouse (18h / show)</h3>
+      <button class="close-btn" onclick="toggleSOP('sop-live-inhouse')">×</button>
+    </div>
+    <div class="sop-detail-body">
+
+      <div class="role-note"><strong>Role:</strong> Khoa owns the GMV target + deal structure for this source. The host team is the key person who runs it, based on the brief Khoa approves.</div>
+      <div class="role-legend">
+        <span><div class="role-dot dot-khoa"></div>Khoa (Owner)</span>
+        <span><div class="role-dot dot-key"></div>Key person (does the task)</span>
+      </div>
+
+      <p style="font-size:11px;font-weight:600;color:var(--gray-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">7-step script funnel — the core of every live show</p>
+      <div class="funnel-grid">
+        <div class="funnel-item"><div class="funnel-n">01</div><div class="funnel-body"><strong>Hook / FOMO</strong><span>Get attention right away — viral angle, social proof, urgency</span></div></div>
+        <div class="funnel-item"><div class="funnel-n">02</div><div class="funnel-body"><strong>Dramatize problem</strong><span>Make the customer's problem feel bigger and more urgent</span></div></div>
+        <div class="funnel-item"><div class="funnel-n">03</div><div class="funnel-body"><strong>USP solution</strong><span>Show the solution — what makes the product different</span></div></div>
+        <div class="funnel-item"><div class="funnel-n">04</div><div class="funnel-body"><strong>Prove result</strong><span>Live demo/test, before-after, real proof on screen</span></div></div>
+        <div class="funnel-item"><div class="funnel-n">05</div><div class="funnel-body"><strong>Create demand</strong><span>Build long-term demand — not just one purchase, but a habit</span></div></div>
+        <div class="funnel-item"><div class="funnel-n">06</div><div class="funnel-body"><strong>Minigame</strong><span>Keep viewers engaged before the close</span></div></div>
+        <div class="funnel-item"><div class="funnel-n">07</div><div class="funnel-body"><strong>CTA close</strong><span>A clear call to action, tied to a specific deal/voucher</span></div></div>
+      </div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Set the GMV/session target based on the monthly breakdown. Approve the deal structure: flash deals for peak hours (12pm, 8–10pm)</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who">Key (Host)</div>
+        <div class="wf-text">Check equipment: camera, mic, lighting, internet, live software</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who">Key (Host)</div>
+        <div class="wf-text">Build the script using the approved 7-step funnel, learn deals + USP, set up products on screen</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who">Key (Host)</div>
+        <div class="wf-text">Follow all 7 funnel steps in order, do not skip any</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Check dashboard every 30 minutes: GMV, viewers, CVR by funnel stage</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">If CVR is low or viewers drop &gt;20% → push the host to adjust the deal/script live on air</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-opt">Optimize</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Compare real GMV vs target at each funnel step — find the weak stage to improve next time</div>
+      </div>
+
+      <p style="font-size:11px;font-weight:600;color:var(--gray-3);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 8px">Funnel-stage debug</p>
+      <table class="debug-table">
+        <tr><td>Drop at Hook</td><td>Change the FOMO angle, try a different social proof</td></tr>
+        <tr><td>Drop at USP</td><td>Make the difference clearer, use a direct comparison</td></tr>
+        <tr><td>Low CVR at CTA</td><td>Add more minigames, build stronger urgency</td></tr>
+        <tr><td>Viewers drop mid-show</td><td>Adjust the concept based on real-time feedback, push a new flash deal</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="sop-detail" id="sop-live-affiliate">
+    <div class="sop-detail-header">
+      <h3>SOP — Live affiliate</h3>
+      <button class="close-btn" onclick="toggleSOP('sop-live-affiliate')">×</button>
+    </div>
+    <div class="sop-detail-body">
+
+      <div class="role-note"><strong>Role:</strong> This is the source Khoa is most hands-on with — booking creators myself, negotiating deals, building KOL relationships, and owning the final ROI.</div>
+
+      <p style="font-size:11px;font-weight:600;color:var(--gray-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Channel mix strategy — 3 sources at once</p>
+      <div class="mix-grid">
+        <div class="mix-card"><h4>Solo booking</h4><p>Mega Live (Top Creator) and Daily Live (KOC) — I choose each creator myself based on the brief</p></div>
+        <div class="mix-card"><h4>MCN network</h4><p>Connect with MCNs to add more live shows, and get better help negotiating deals/commission</p></div>
+        <div class="mix-card"><h4>Exclusive booking</h4><p>Book exclusive live shows with Top Creators at the same time → keeps a stable base of GMV</p></div>
+      </div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Tier KOLs: Mega Live vs Daily Live. Book myself by schedule + slot, brief on USP, price floor, key message</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Negotiate commission tiers based on NMV — set a separate affiliate link for each KOL to track accurately</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who">Key (Creator)</div>
+        <div class="wf-text">Post a teaser video before the live show to build anticipation</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Watch the live show: check the KOL is using the right deal, price, brief. Track NMV in real time via affiliate link</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Help with hooks/deals if a KOL is underperforming in the first hour. Make sure stock matches the forecast</div>
+      </div>
+
+      <div class="flow-box">
+        <h5>Ads handoff flow</h5>
+        <div class="flow-list">
+          <span class="flow-step">Creator sends video code + ads code</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Khoa passes it to the ads team</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Ads team boosts the live show</span>
+        </div>
+      </div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-opt">Optimize</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Calculate real ROI = NMV / (fee + commission + ads spend). Compare organic GMV vs GMV with ads boost</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-report">Report</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Rank: Top / Maintain / Cut. Top → upgrade to exclusive commission. Update the KOL database</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sop-detail" id="sop-video-inhouse">
+    <div class="sop-detail-header">
+      <h3>SOP — Video inhouse</h3>
+      <button class="close-btn" onclick="toggleSOP('sop-video-inhouse')">×</button>
+    </div>
+    <div class="sop-detail-body">
+
+      <p style="font-size:11px;font-weight:600;color:var(--gray-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Content taxonomy — 4 fixed types</p>
+      <div class="tax-grid">
+        <div class="tax-card"><h4>Introduction</h4><p>First-time intro of a product or brand</p></div>
+        <div class="tax-card"><h4>Entertainment</h4><p>Fun content tied to the brand, easy to go viral</p></div>
+        <div class="tax-card"><h4>Review</h4><p>Feature review, real demo</p></div>
+        <div class="tax-card"><h4>Engagement</h4><p>Community interaction, react to trends</p></div>
+      </div>
+
+      <div class="role-note"><strong>Role:</strong> The agency content team is the key person who produces the videos. Khoa reviews, approves concepts, and tracks performance to decide what's next.</div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who">Key (Agency)</div>
+        <div class="wf-text">Build a content calendar with 5 fixed series, tied to the content taxonomy. Use mascot/character storytelling when it fits the brand</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who">Key (Agency)</div>
+        <div class="wf-text">Write a detailed script: opening/middle/ending scenes, setting, music, props</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who">Key (Agency)</div>
+        <div class="wf-text">Film using the detailed script, follow the agreed setting and brand cues. Edit with the standard brand template</div>
+      </div>
+
+      <div class="feedback-row">
+        <div class="fb-col"><h5>Layer 1 — Before filming</h5><p>Khoa gives feedback on the proposed angle/hook — adjust the concept before official production</p></div>
+        <div class="fb-col"><h5>Layer 2 — After editing</h5><p>Khoa gives feedback on the draft video — check brand cues and pace before posting</p></div>
+      </div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Review and approve before posting. Approve the upload schedule for peak hours</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-opt">Optimize</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Track performance 4 days after posting — compare to target, give feedback to the agency if needed</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-report">Report</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Review the agency's weekly A/B hook test — pick the winner to guide the next series</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sop-detail" id="sop-video-affiliate">
+    <div class="sop-detail-header">
+      <h3>SOP — Video affiliate (seeding)</h3>
+      <button class="close-btn" onclick="toggleSOP('sop-video-affiliate')">×</button>
+    </div>
+    <div class="sop-detail-body">
+
+      <div class="role-note"><strong>Role:</strong> The ops team is the key person doing daily seeding. Khoa researches the initial strategy, tracks GMV to find winners, and decides when to double down with ads.</div>
+
+      <div class="tool-row">
+        <span class="tool-pill">Kalodata research</span>
+        <span class="tool-pill">MCN network</span>
+        <span class="tool-pill">AM TikTok Shop</span>
+        <span class="tool-pill">GMV Max</span>
+      </div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Research KOCs with a data tool: real GMV, conversion rate, product category — never just follower count</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Build the seeding list by tier: Celeb / Top KOL / KOC. Connect through 3 sources: my own outreach, MCN, AM TikTok Shop</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who">Key (Ops)</div>
+        <div class="wf-text">Send sample + brief, confirm it arrived. Remind after 7 days, flag after 14 days if not posted</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who">Key (Ops)</div>
+        <div class="wf-text">Quality check: brief, product, compliance</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Track GMV for each video with its own tracking link — find the videos with strong sales</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-opt">Optimize</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Rank after 30 days: Star / Maintain / Sleep / Cut. Winning video → ask for or buy the ads code from the creator</div>
+      </div>
+
+      <div class="flow-box">
+        <h5>Double-down flow</h5>
+        <div class="flow-list">
+          <span class="flow-step">Find the winning video</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Get or buy the ads code</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Send to ads team</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Boost the video</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Push into GMV Max</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Auto-delivered to a wider audience</span>
+        </div>
+      </div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-report">Report</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Update the KOC master database. Compare GMV uplift after boost vs the starting point</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sop-detail" id="sop-product-card">
+    <div class="sop-detail-header">
+      <h3>SOP — Product card</h3>
+      <button class="close-btn" onclick="toggleSOP('sop-product-card')">×</button>
+    </div>
+    <div class="sop-detail-body">
+
+      <div class="role-note"><strong>Role:</strong> Khoa sets the SKU strategy and pricing direction. The ads team is the key person who sets up ads + PSA based on the list Khoa sends.</div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Group SKUs: A (hero, push hard) / B (volume) / C (long-tail). Set the pricing strategy</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-planning">Planning</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Audit the listing: does the title have the main keyword? Are the photos the right size? Is the product video under 60s?</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who">Key (Listing team)</div>
+        <div class="wf-text">Set up a clean listing: keyword in the first 15 words of the title, 6–8 high-quality photos</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who">Key (Ads team)</div>
+        <div class="wf-text">Run Product Shopping Ads for A-tier SKUs: CPA target, do not raise the bid too fast in the first 3 days</div>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-phase wf-exec">Execution</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Compile the month's Top Selling SKU list — send it to the ads team</div>
+      </div>
+
+      <div class="flow-box">
+        <h5>PSA handoff flow</h5>
+        <div class="flow-list">
+          <span class="flow-step">Khoa compiles the month's Top Selling SKUs</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Sends the list to ads team</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Ads team runs PSA</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">SKU rises in search</span>
+        </div>
+      </div>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-opt">Optimize</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Debug by funnel: low impression → keyword/ads issue. Low CTR → photo/title. Low CVR → price/reviews</div>
+      </div>
+
+      <p style="font-size:11px;font-weight:600;color:var(--gray-3);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 8px">Funnel debug</p>
+      <table class="debug-table">
+        <tr><td>Low impression</td><td>Keyword/ads bid issue — re-research keywords + raise bid</td></tr>
+        <tr><td>Low CTR despite high impression</td><td>Photos/title not appealing — A/B test the thumbnail</td></tr>
+        <tr><td>Low CVR despite good CTR</td><td>Price not competitive, or weak reviews</td></tr>
+        <tr><td>ROAS dropping over time</td><td>Ad fatigue — refresh the creative every 2–3 weeks</td></tr>
+      </table>
+
+      <div class="workflow-row">
+        <div class="wf-phase wf-report">Report</div>
+        <div class="wf-who khoa">Khoa</div>
+        <div class="wf-text">Decide to cut ads if ROAS &lt; 1 after 7 days. Compare search ranking before/after PSA</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CASE STUDY -->
+<section id="casestudy">
+  <div class="section-label">Case study</div>
+
+  <div class="case-hero">
+    <div class="case-eyebrow">P&G Beauty · TikTok Shop Vietnam · 2024–2025</div>
+    <h2 class="case-title">Scaling from a low baseline to +9,300% GMV by coordinating 5 traffic sources at once</h2>
+    <div class="case-stat-row">
+      <div class="case-stat">
+        <div class="num">+9,300%</div>
+        <div class="lbl">GMV growth</div>
+      </div>
+      <div class="case-stat">
+        <div class="num">5/5</div>
+        <div class="lbl">Sources tracked</div>
+      </div>
+      <div class="case-stat">
+        <div class="num">Store Owner</div>
+        <div class="lbl">Role</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-sections">
+    <div class="case-block">
+      <h4>Context</h4>
+      <p>P&G Beauty entered TikTok Shop Vietnam with low GMV while beauty competitors had already invested heavily in livestream and affiliate. As Store Owner through a distributor, my role was to own the total GMV target and the deal list — not to produce content or host shows myself, but to coordinate the key people in charge of each source to reach the shared goal.</p>
+    </div>
+
+    <div class="case-block">
+      <h4>Problem</h4>
+      <ul>
+        <li>Only 1–2 sources were active, so livestream and affiliate power was not used</li>
+        <li>No ROI tracking system per channel — no clear sense of where to put the budget</li>
+        <li>KOL/KOC seeding was based on gut feeling, with no pipeline to sort winners from losers</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <h4>Action</h4>
+      <div class="action-step">
+        <div class="step-n">01</div>
+        <div class="step-content">
+          <strong>Break down the target by source</strong>
+          <span>Split the total GMV target across 5 sources based on expected contribution — the base for weekly tracking and diagnosis.</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">02</div>
+        <div class="step-content">
+          <strong>Book and negotiate Live affiliate myself</strong>
+          <span>Negotiated directly with KOLs/KOCs, mixing solo booking + MCN network + exclusive booking to keep a stable base of GMV.</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">03</div>
+        <div class="step-content">
+          <strong>Track and approve content from the agency</strong>
+          <span>Approved concepts for Live inhouse and Video inhouse before production, reviewed performance to guide what comes next.</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">04</div>
+        <div class="step-content">
+          <strong>Diagnose and push the right person when target is missed</strong>
+          <span>When GMV fell short of target, found which source was weakest, and pushed the right person to take clear action (more bookings, new deals, boost ads with PSA).</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">05</div>
+        <div class="step-content">
+          <strong>Turned it into an Operations Map</strong>
+          <span>From tracking each source closely, I built a full operations framework — a clear view of Planning/Execution/Optimization/Reporting across all 5 traffic sources.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <h4>Result</h4>
+      <div class="result-row-cs">
+        <span class="rl">GMV growth vs baseline</span>
+        <span class="rv">+9,300%</span>
+      </div>
+      <div class="result-row-cs">
+        <span class="rl">Traffic sources tracked</span>
+        <span class="rv">5 / 5</span>
+      </div>
+      <div class="result-row-cs">
+        <span class="rl">Operations framework</span>
+        <span class="rv">Built, transferable</span>
+      </div>
+      <div class="result-row-cs">
+        <span class="rl">KOL relationships</span>
+        <span class="rv">Built myself, tiered</span>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <h4>Learning</h4>
+      <div class="learning-item">
+        <div class="l-dot"></div>
+        <div class="l-text">
+          <strong>An owner doesn't need to do everything, just know who to push</strong>
+          <p>The value is not in doing every task yourself — it's in reading the numbers, finding the real problem, and pushing the right person at the right time.</p>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="l-dot"></div>
+        <div class="l-text">
+          <strong>Tracking is the foundation for scaling</strong>
+          <p>Without breaking down the target by source, every push is a guess. Track each source closely from day one.</p>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="l-dot"></div>
+        <div class="l-text">
+          <strong>Direct relationships are hard to copy</strong>
+          <p>The one part I did myself — KOL relationships in Live affiliate — turned out to be the hardest part of the whole system to replace.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY 2: STANHOME -->
+<section id="casestudy2" style="padding-top:0">
+
+  <div class="case-hero" style="background:#0A2540">
+    <div class="case-eyebrow" style="color:#00C9A7">Stanhome · Shopee Mall · 2023–2024</div>
+    <h2 class="case-title">From 20–30 orders/month to 100+ orders/month on Shopee — through SEO listing, ad optimization, and a data-driven SKU strategy</h2>
+    <div class="case-stat-row">
+      <div class="case-stat">
+        <div class="num" style="color:#00C9A7">+233%</div>
+        <div class="lbl">Orders/month</div>
+      </div>
+      <div class="case-stat">
+        <div class="num" style="color:#00C9A7">9.47</div>
+        <div class="lbl">Shopee ads ROAS</div>
+      </div>
+      <div class="case-stat">
+        <div class="num" style="color:#00C9A7">+741%</div>
+        <div class="lbl">Top SKU revenue</div>
+      </div>
+      <div class="case-stat">
+        <div class="num" style="color:#00C9A7">Top 10</div>
+        <div class="lbl">Shopee search · 2 keywords</div>
+      </div>
+      <div class="case-stat">
+        <div class="num" style="color:#00C9A7">Hands-on</div>
+        <div class="lbl">Full executor</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-sections">
+    <div class="case-block">
+      <h4>Context</h4>
+      <p><strong>A different role from P&G:</strong> at Stanhome, I did everything myself — no key person in between. Stanhome is a French pharmacy cosmetics brand with 60 years of history, on Shopee Mall Vietnam but with low GMV — only 20–30 products sold per month. There was no real listing strategy, ads were not optimized, and there was no SKU grouping strategy. I did the SEO listing, set up ads, built an analytics dashboard, and planned the budget across channels myself.</p>
+    </div>
+
+    <div class="case-block">
+      <h4>Problem</h4>
+      <ul>
+        <li>Listings had no main keyword — products did not show up in organic search</li>
+        <li>Ads ran with no SKU data to guide them — budget was spread evenly instead of focused on strong products</li>
+        <li>No system to analyze traffic by channel (Shopee Key, Google, Facebook) to know which one was converting</li>
+        <li>Shop page was not optimized — low CTR, high bounce rate</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <h4>Action</h4>
+      <div class="action-step">
+        <div class="step-n">01</div>
+        <div class="step-content">
+          <strong>SEO listing for the whole catalog</strong>
+          <span>Researched keywords for each SKU, optimized titles to put the main keyword in the first 15 words. Result: 2 key products (moisturizer + body wash) reached the top 10 in Shopee search for their category keyword.</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">02</div>
+        <div class="step-content">
+          <strong>Group SKUs by traffic data + conversion rate</strong>
+          <span>Built a dashboard to track traffic by source (Shopee Key, Google+Google, Key+Google+Facebook). Sorted into 4 groups: high traffic/high CR → keep as is; high traffic/low CR → optimize ads; low traffic/high CR → raise budget; low traffic/low CR → fix listing + creative.</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">03</div>
+        <div class="step-content">
+          <strong>Optimized CPC ads with controlled budget</strong>
+          <span>Set up CPC ads for priority SKUs, tracked CTR + ROAS every week. Scaled budget 20% at a time for winning SKUs. Result: shop-wide ROAS reached 9.47 on a 3-month spend.</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">04</div>
+        <div class="step-content">
+          <strong>Built a multi-channel budget plan</strong>
+          <span>Built a spending plan file by channel (Shopee, Lazada, Facebook, Google, TikTok, Zalo, Tiki) with revenue forecast and cost/revenue ratio per channel — used by management to decide the monthly budget split.</span>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="step-n">05</div>
+        <div class="step-content">
+          <strong>Sent regular reports with an optimization loop</strong>
+          <span>Sent monthly reports with clear recommendations by SKU group — not just numbers, but the next action to take. In June: Balance Shampoo sales doubled vs May, Soft Shower grew 50%.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <h4>Result</h4>
+      <div class="result-row-cs">
+        <span class="rl">Orders/month</span>
+        <span class="rv">20–30 → 100+ (+233%)</span>
+      </div>
+      <div class="result-row-cs">
+        <span class="rl">Shop-wide ROAS (3 months)</span>
+        <span class="rv">9.47</span>
+      </div>
+      <div class="result-row-cs">
+        <span class="rl">Moisturizer SKU revenue</span>
+        <span class="rv">+535.6% vs previous period</span>
+      </div>
+      <div class="result-row-cs">
+        <span class="rl">Balance Shampoo SKU revenue</span>
+        <span class="rv">+741.3% · CTR up +44.6%</span>
+      </div>
+      <div class="result-row-cs">
+        <span class="rl">SEO listing</span>
+        <span class="rv">Top 10 Shopee · 2 category keywords</span>
+      </div>
+    </div>
+
+
+    <div class="case-block">
+      <h4>Proof</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <p style="font-size:11px;color:var(--gray-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">SEO top 10 — moisturizer</p>
+          <div style="width:100%;border-radius:8px;border:1px solid var(--gray-2);background:var(--gray-1);padding:32px;text-align:center;color:var(--gray-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em">SEO top 10 Shopee — moisturizer</div>
+        </div>
+        <div>
+          <p style="font-size:11px;color:var(--gray-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">SEO top 10 — shower gel</p>
+          <div style="width:100%;border-radius:8px;border:1px solid var(--gray-2);background:var(--gray-1);padding:32px;text-align:center;color:var(--gray-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em">SEO top 10 Shopee — shower gel</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <p style="font-size:11px;color:var(--gray-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Push sale — before (T6.2023) vs after (T8.2024)</p>
+          <div style="width:100%;border-radius:8px;border:1px solid var(--gray-2);background:var(--gray-1);padding:32px;text-align:center;color:var(--gray-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em">Push sale before after</div>
+        </div>
+        <div>
+          <p style="font-size:11px;color:var(--gray-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Orders grew from 20–30 to 100+ per month</p>
+          <div style="width:100%;border-radius:8px;border:1px solid var(--gray-2);background:var(--gray-1);padding:32px;text-align:center;color:var(--gray-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em">Don hang tang</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <p style="font-size:11px;color:var(--gray-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Data analyst dashboard — SKUs grouped by traffic × CR</p>
+          <div style="width:100%;border-radius:8px;border:1px solid var(--gray-2);background:var(--gray-1);padding:32px;text-align:center;color:var(--gray-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em">Data analyst dashboard</div>
+        </div>
+        <div>
+          <p style="font-size:11px;color:var(--gray-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Ads ROAS 9.47 · Doanh thu SKU +741%</p>
+          <div style="width:100%;border-radius:8px;border:1px solid var(--gray-2);background:var(--gray-1);padding:32px;text-align:center;color:var(--gray-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em">Ads performance ROAS</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-block">
+      <h4>Learning</h4>
+      <div class="learning-item">
+        <div class="l-dot"></div>
+        <div class="l-text">
+          <strong>SEO listing is the foundation, not an option</strong>
+          <p>You can turn ads off anytime, but an optimized listing keeps bringing organic traffic forever. Do SEO first, then scale ads — not the other way around.</p>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="l-dot"></div>
+        <div class="l-text">
+          <strong>Group SKUs before spending on ads</strong>
+          <p>Spreading the budget equally across all SKUs is the fastest way to waste money. Group SKUs by traffic × CR to know exactly where to invest.</p>
+        </div>
+      </div>
+      <div class="learning-item">
+        <div class="l-dot"></div>
+        <div class="l-text">
+          <strong>A report with recommendations beats a report with numbers</strong>
+          <p>A report with only numbers is just a dashboard. The real value is reading the numbers and giving the next action right in the report.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<div class="footer-section">
+  <div>
+    <div class="footer-name">Nguyễn Đăng Khoa</div>
+    <div class="footer-sub">TikTok Shop Operations · Ho Chi Minh City</div>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:email@example.com">Email</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">TikTok Shop profile</a>
+  </div>
+</div>
+
+<script>
+function toggleSOP(id) {
+  const allDetails = document.querySelectorAll('.sop-detail');
+  const target = document.getElementById(id);
+  const isOpen = target.classList.contains('open');
+  allDetails.forEach(d => d.classList.remove('open'));
+  if (!isOpen) {
+    target.classList.add('open');
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+}
+</script>
+</body>
+</html>
